@@ -40,11 +40,17 @@ public class GunBehaviour : MonoBehaviour
 
             if(Physics.Raycast(cam.transform.position,cam.transform.forward,out hitInfo,range))
             {
-                EnemyBehaviour target = hitInfo.transform.GetComponent<EnemyBehaviour>();
+                EnemyBehaviour enemy = hitInfo.transform.GetComponent<EnemyBehaviour>();
+                targetbehaviour target = hitInfo.transform.GetComponent<targetbehaviour>();
+
+                if(enemy!=null)
+                {
+                    enemy.TakeDamage(damage);
+                }
 
                 if(target!=null)
                 {
-                    target.TakeDamage(damage);
+                    target.die();
                 }
             }
             Instantiate(impacteffect,hitInfo.point,Quaternion.LookRotation(hitInfo.normal));
