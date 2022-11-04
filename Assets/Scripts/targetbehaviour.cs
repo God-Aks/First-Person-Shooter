@@ -20,14 +20,15 @@ public class targetbehaviour : MonoBehaviour
     public void die()
     {
         Getcomponent<Renderer>().enabled = false;
+        Invoke("respawn()",2f);
     }
 
     void respawn()
     {
-        float spawnY = Random.Range(Camera.main.ScreenToWorldPoint(new Vector2(0, 0)).y, Camera.main.ScreenToWorldPoint(new Vector2(0, Screen.height)).y);
-        float spawnX = Random.Range(Camera.main.ScreenToWorldPoint(new Vector2(0, 0)).x, Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, 0)).x);
+        float spawnY = UnityEngine.Random.Range(Camera.main.ScreenToWorldPoint(new Vector2(0, 0)).y, Camera.main.ScreenToWorldPoint(new Vector2(0, Screen.height)).y);
+        float spawnX = UnityEngine.Random.Range(Camera.main.ScreenToWorldPoint(new Vector2(0, 0)).x, Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, 0)).x);
 
         Vector2 spawnpoint = new Vector2(spawnX,spawnY);
-        Instantiate(gameObject,spawnpoint,Quartenion.Identity);
+        Instantiate(gameObject,spawnpoint,Quartenion.identity);
     }
 }
