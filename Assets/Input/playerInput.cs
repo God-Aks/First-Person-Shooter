@@ -80,6 +80,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PointReset"",
+                    ""type"": ""Button"",
+                    ""id"": ""694191e1-d2d8-4666-ba7e-c474bace3d69"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -269,6 +278,17 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""action"": ""scope"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7a4aa855-bb38-4cc6-af87-8ba17f4dcafa"",
+                    ""path"": ""<Keyboard>/#(P)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PointReset"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -283,6 +303,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_OnFoot_Crouch = m_OnFoot.FindAction("Crouch", throwIfNotFound: true);
         m_OnFoot_Fire = m_OnFoot.FindAction("Fire", throwIfNotFound: true);
         m_OnFoot_scope = m_OnFoot.FindAction("scope", throwIfNotFound: true);
+        m_OnFoot_PointReset = m_OnFoot.FindAction("PointReset", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -348,6 +369,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_OnFoot_Crouch;
     private readonly InputAction m_OnFoot_Fire;
     private readonly InputAction m_OnFoot_scope;
+    private readonly InputAction m_OnFoot_PointReset;
     public struct OnFootActions
     {
         private @PlayerInput m_Wrapper;
@@ -358,6 +380,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @Crouch => m_Wrapper.m_OnFoot_Crouch;
         public InputAction @Fire => m_Wrapper.m_OnFoot_Fire;
         public InputAction @scope => m_Wrapper.m_OnFoot_scope;
+        public InputAction @PointReset => m_Wrapper.m_OnFoot_PointReset;
         public InputActionMap Get() { return m_Wrapper.m_OnFoot; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -385,6 +408,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @scope.started -= m_Wrapper.m_OnFootActionsCallbackInterface.OnScope;
                 @scope.performed -= m_Wrapper.m_OnFootActionsCallbackInterface.OnScope;
                 @scope.canceled -= m_Wrapper.m_OnFootActionsCallbackInterface.OnScope;
+                @PointReset.started -= m_Wrapper.m_OnFootActionsCallbackInterface.OnPointReset;
+                @PointReset.performed -= m_Wrapper.m_OnFootActionsCallbackInterface.OnPointReset;
+                @PointReset.canceled -= m_Wrapper.m_OnFootActionsCallbackInterface.OnPointReset;
             }
             m_Wrapper.m_OnFootActionsCallbackInterface = instance;
             if (instance != null)
@@ -407,6 +433,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @scope.started += instance.OnScope;
                 @scope.performed += instance.OnScope;
                 @scope.canceled += instance.OnScope;
+                @PointReset.started += instance.OnPointReset;
+                @PointReset.performed += instance.OnPointReset;
+                @PointReset.canceled += instance.OnPointReset;
             }
         }
     }
@@ -419,5 +448,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnCrouch(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnScope(InputAction.CallbackContext context);
+        void OnPointReset(InputAction.CallbackContext context);
     }
 }
