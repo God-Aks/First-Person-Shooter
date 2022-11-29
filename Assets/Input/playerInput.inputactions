@@ -33,6 +33,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "Sprint",
+                    "type": "Button",
+                    "id": "2d0780b3-4e09-4f9c-9dfd-989951f89cca",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Crouch",
                     "type": "Button",
                     "id": "73e9ba46-83af-438b-b4f6-4b1a008f396f",
@@ -265,6 +274,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "PointReset",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f1bd7197-ce81-4e49-bd14-4d5ed5fcce93",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Sprint",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

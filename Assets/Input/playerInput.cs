@@ -55,6 +55,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
+                    ""name"": ""Sprint"",
+                    ""type"": ""Button"",
+                    ""id"": ""2d0780b3-4e09-4f9c-9dfd-989951f89cca"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Crouch"",
                     ""type"": ""Button"",
                     ""id"": ""73e9ba46-83af-438b-b4f6-4b1a008f396f"",
@@ -289,6 +298,17 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""action"": ""PointReset"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f1bd7197-ce81-4e49-bd14-4d5ed5fcce93"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -300,6 +320,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_OnFoot_Movement = m_OnFoot.FindAction("Movement", throwIfNotFound: true);
         m_OnFoot_Jump = m_OnFoot.FindAction("Jump", throwIfNotFound: true);
         m_OnFoot_Look = m_OnFoot.FindAction("Look", throwIfNotFound: true);
+        m_OnFoot_Sprint = m_OnFoot.FindAction("Sprint", throwIfNotFound: true);
         m_OnFoot_Crouch = m_OnFoot.FindAction("Crouch", throwIfNotFound: true);
         m_OnFoot_Fire = m_OnFoot.FindAction("Fire", throwIfNotFound: true);
         m_OnFoot_scope = m_OnFoot.FindAction("scope", throwIfNotFound: true);
@@ -366,6 +387,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_OnFoot_Movement;
     private readonly InputAction m_OnFoot_Jump;
     private readonly InputAction m_OnFoot_Look;
+    private readonly InputAction m_OnFoot_Sprint;
     private readonly InputAction m_OnFoot_Crouch;
     private readonly InputAction m_OnFoot_Fire;
     private readonly InputAction m_OnFoot_scope;
@@ -377,6 +399,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_OnFoot_Movement;
         public InputAction @Jump => m_Wrapper.m_OnFoot_Jump;
         public InputAction @Look => m_Wrapper.m_OnFoot_Look;
+        public InputAction @Sprint => m_Wrapper.m_OnFoot_Sprint;
         public InputAction @Crouch => m_Wrapper.m_OnFoot_Crouch;
         public InputAction @Fire => m_Wrapper.m_OnFoot_Fire;
         public InputAction @scope => m_Wrapper.m_OnFoot_scope;
@@ -399,6 +422,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Look.started -= m_Wrapper.m_OnFootActionsCallbackInterface.OnLook;
                 @Look.performed -= m_Wrapper.m_OnFootActionsCallbackInterface.OnLook;
                 @Look.canceled -= m_Wrapper.m_OnFootActionsCallbackInterface.OnLook;
+                @Sprint.started -= m_Wrapper.m_OnFootActionsCallbackInterface.OnSprint;
+                @Sprint.performed -= m_Wrapper.m_OnFootActionsCallbackInterface.OnSprint;
+                @Sprint.canceled -= m_Wrapper.m_OnFootActionsCallbackInterface.OnSprint;
                 @Crouch.started -= m_Wrapper.m_OnFootActionsCallbackInterface.OnCrouch;
                 @Crouch.performed -= m_Wrapper.m_OnFootActionsCallbackInterface.OnCrouch;
                 @Crouch.canceled -= m_Wrapper.m_OnFootActionsCallbackInterface.OnCrouch;
@@ -424,6 +450,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Look.started += instance.OnLook;
                 @Look.performed += instance.OnLook;
                 @Look.canceled += instance.OnLook;
+                @Sprint.started += instance.OnSprint;
+                @Sprint.performed += instance.OnSprint;
+                @Sprint.canceled += instance.OnSprint;
                 @Crouch.started += instance.OnCrouch;
                 @Crouch.performed += instance.OnCrouch;
                 @Crouch.canceled += instance.OnCrouch;
@@ -445,6 +474,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
+        void OnSprint(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnScope(InputAction.CallbackContext context);

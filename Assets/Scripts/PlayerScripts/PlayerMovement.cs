@@ -10,8 +10,12 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] float gravity = -9.8f;
     [SerializeField] public float speed = 5f;
+    float minspeed = 5f;
+    float maxspeed = 10f;
 
     [SerializeField] public float JumpHeight = 3f;
+
+    bool speedbehav = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,9 +25,26 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (speedbehav)
+        {
+            Debug.Log("Sprinting");
+            if (speed != maxspeed)
+            {
+                incSpeed();
+            }
+            
+        }
+        else
+        {
+            if(speed != minspeed)
+            {
+                decSpeed();
+            }
+            
+        }
         isGrounded = character.isGrounded;
 
-        Debug.Log(PlayerVelocity.y);
+        //Debug.Log(PlayerVelocity.y);
     }
 
     public void ProcessMove(Vector3 input){
@@ -34,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
         PlayerVelocity.y += gravity*Time.deltaTime;
 
         if(isGrounded && PlayerVelocity.y <0)
-            PlayerVelocity.y = -2f;
+            PlayerVelocity.y = -9.8f;
         character.Move(PlayerVelocity*Time.deltaTime);
 
     }
@@ -42,6 +63,21 @@ public class PlayerMovement : MonoBehaviour
     public void Jump(){
         if(isGrounded)
             PlayerVelocity.y = Mathf.Sqrt(JumpHeight * gravity * -2f);
+    }
+
+    public void incSpeed()
+    {
+        speed += 5f;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+    }
+
+    public void decSpeed()
+    {
+        speed -= 5f;
+    }
+
+    public void speedbehaviour()
+    {
+        speedbehav = !speedbehav;
     }
   
 }

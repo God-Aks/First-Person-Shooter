@@ -31,6 +31,7 @@ public class InputManager : MonoBehaviour
         //burstFire = GetComponent<BurstFireBehaviour>();
 
         //Implementing callback for the basic movements and actions
+        onFoot.Sprint.performed += ctx => movement.incSpeed();
         onFoot.Jump.performed += ctx => movement.Jump();
         onFoot.Fire.performed += ctx => gun.shoot();
         onFoot.PointReset.performed += ctx => target.GetComponent<targetbehaviour>().resetPoints();
@@ -68,4 +69,6 @@ public class InputManager : MonoBehaviour
     private void OnEnable() {
         onFoot.Enable();
     }
+
+    
 }
